@@ -3,6 +3,14 @@ const app = express();//framework để code web
 const mongoose = require("mongoose");//csdl mongoodb
 require("dotenv").config();//include file .env
 
+const expressLayout = require('express-ejs-layouts');
+app.use(expressLayout);
+
+
+
+const homeController = require('./controllers/home_controller');
+
+
 app.set("view engine", "ejs");//set view engine
 
 app.set("views", "./views");//set thư mục view
@@ -17,6 +25,9 @@ mongoose.connect(process.env.mongoose, {
 },()=>{
     console.log('connect database successfully');
 });
+
+
+app.use('/trang-chu',homeController);
 
 app.get("/", (req, res) => {
   res.render("index");
